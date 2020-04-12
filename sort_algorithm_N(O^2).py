@@ -4,8 +4,6 @@
 from random import randint
 import timeit
 
-
-
 def selectsort1(arr):
     for i in range(len(arr)):
         for j in range(i+1,len(arr)):
