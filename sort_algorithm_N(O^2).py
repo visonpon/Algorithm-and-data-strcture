@@ -10,6 +10,16 @@ def selectsort1(arr):
     print('select sorted1 array:',arr)
     return arr
 
+def selectsort2(arr):
+    for i in range(len(arr)):
+        minposition=i#记录待交换元素的位置。
+        for j in range(i+1,len(arr)):
+            if arr[minposition]>arr[j]:
+                minposition=j
+        arr[i],arr[minposition]=arr[minposition],arr[i]#交换位置发生变化。
+    print('select sorted1 array:', arr)
+    return arr
+
 def insertsort1(arr):
     for i in range(1,len(arr)):
         while arr[i-1]>arr[i] and i>0:
@@ -36,14 +46,16 @@ list=[randint(0,max) for x in range(max)]
 alist=list[:]
 blist=list[:]
 clist=list[:]
-
+dlist=list[:]
 
 t0=timeit.Timer('selectsort1(alist)','from __main__ import selectsort1,alist')
 print('选择排序1: %s s' %t0.timeit(number=1))
 
-t1=timeit.Timer('insertsort1(blist)','from __main__ import insertsort1,blist')
-print('插入排序: %s s' %t1.timeit(number=1))
+t1=timeit.Timer('selectsort2(blist)','from __main__ import selectsort2,blist')
+print('选择排序2: %s s' %t1.timeit(number=1))
 
-t2=timeit.Timer('insertsort2(clist)','from __main__ import insertsort2,clist')
+t2=timeit.Timer('insertsort1(clist)','from __main__ import insertsort1,clist')
 print('插入排序: %s s' %t2.timeit(number=1))
 
+t3=timeit.Timer('insertsort2(dlist)','from __main__ import insertsort2,dlist')
+print('插入排序: %s s' %t3.timeit(number=1))
