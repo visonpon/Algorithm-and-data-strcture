@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
+# authored by dp 2020/04/12
+
 from random import randint
 import timeit
+
+
 
 def selectsort1(arr):
     for i in range(len(arr)):
@@ -20,16 +24,26 @@ def selectsort2(arr):
     print('select sorted1 array:', arr)
     return arr
 
-def insertsort1(arr):
+
+def insertsort10(arr):
     for i in range(1,len(arr)):
         while arr[i-1]>arr[i] and i>0:
             arr[i-1],arr[i] = arr[i],arr[i-1]
             i = i-1
-    print('sorted1 array:',arr)
+    print('sorted10 array:',arr)
     return arr
 
+def insertsort11(arr):
+    for i in range(1,len(arr)):
+        for j in range(i,0,-1):
+            if arr[j-1]>arr[j]:
+                arr[j-1],arr[j] = arr[j],arr[j-1]
+            else:
+                break #break比while时间效率更高
+    print('sorted11 array:',arr)
+    return arr
 #空间换时间，将交换操作的三次赋值减少为一次赋值。
-def insertsort2(arr):
+def insertsort20(arr):
     for i in range(1,len(arr)):
         postion=i
         currentvalue = arr[i]
@@ -37,7 +51,22 @@ def insertsort2(arr):
             arr[postion] = arr[postion-1]
             postion = postion-1
         arr[postion] = currentvalue
-    print('sorted2 array:', arr)
+    print('sorted20 array:', arr)
+    return arr
+
+
+def insertsort21(arr):
+    for i in range(1,len(arr)):
+        postion=i
+        currentvalue = arr[i]
+        for j in range(i,0,-1):
+            if arr[postion-1]>currentvalue:
+                arr[postion] = arr[postion-1]
+                postion = postion-1
+            else:
+                break
+        arr[postion] = currentvalue
+    print('sorted21 array:', arr)
     return arr
 
 max=5000
@@ -47,15 +76,27 @@ alist=list[:]
 blist=list[:]
 clist=list[:]
 dlist=list[:]
+elist=list[:]
+flist=list[:]
 
-t0=timeit.Timer('selectsort1(alist)','from __main__ import selectsort1,alist')
-print('选择排序1: %s s' %t0.timeit(number=1))
 
-t1=timeit.Timer('selectsort2(blist)','from __main__ import selectsort2,blist')
-print('选择排序2: %s s' %t1.timeit(number=1))
+t00=timeit.Timer('selectsort1(alist)','from __main__ import selectsort1,alist')
+print('选择排序1: %s s' %t00.timeit(number=1))
 
-t2=timeit.Timer('insertsort1(clist)','from __main__ import insertsort1,clist')
-print('插入排序: %s s' %t2.timeit(number=1))
+t01=timeit.Timer('selectsort2(blist)','from __main__ import selectsort2,blist')
+print('选择排序2: %s s' %t01.timeit(number=1))
 
-t3=timeit.Timer('insertsort2(dlist)','from __main__ import insertsort2,dlist')
-print('插入排序: %s s' %t3.timeit(number=1))
+
+t10=timeit.Timer('insertsort10(clist)','from __main__ import insertsort10,clist')
+print('插入排序10: %s s' %t10.timeit(number=1))
+
+t11=timeit.Timer('insertsort11(dlist)','from __main__ import insertsort11,dlist')
+print('插入排序11: %s s' %t11.timeit(number=1))
+
+t20=timeit.Timer('insertsort20(elist)','from __main__ import insertsort20,elist')
+print('插入排序20: %s s' %t20.timeit(number=1))
+
+
+t21=timeit.Timer('insertsort21(flist)','from __main__ import insertsort21,flist')
+print('插入排序21: %s s' %t21.timeit(number=1))
+
