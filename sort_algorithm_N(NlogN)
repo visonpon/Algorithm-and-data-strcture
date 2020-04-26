@@ -17,7 +17,6 @@ def insertsort2(arr):
 
     return arr
 
-
 ####TODO
 def mergesort_dp2(arr):
     if(len(arr))>1:
